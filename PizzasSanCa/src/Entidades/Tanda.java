@@ -28,6 +28,9 @@ public class Tanda implements Serializable {
 
     @OneToMany(mappedBy = "tanda")
     private List<Pedido> pedidos;
+    
+    @OneToMany(mappedBy = "tanda")
+    private List<Consume> consumes;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,6 +61,19 @@ public class Tanda implements Serializable {
 
     public void setPaquetes(List<Paquete> paquetes) {
         this.paquetes = paquetes;
+    }
+
+    public List<Consume> getConsumes() {
+        return consumes;
+    }
+
+    public void setConsumes(List<Consume> consumes) {
+        this.consumes = consumes;
+    }
+    
+    public void addConsume(Consume consume)
+    {
+        this.consumes.add(consume);
     }
 
     public List<Pedido> getPedidos() {

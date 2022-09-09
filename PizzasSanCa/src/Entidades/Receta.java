@@ -22,6 +22,46 @@ public class Receta implements Serializable {
 
     @OneToMany(mappedBy = "receta")
     private List<Tanda> tandas;
+    private String nombre;
+    
+    @OneToMany(mappedBy = "receta")
+    private List<Cantidad> cantidades;
+
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public void addCantidad(Cantidad cantidad) {
+        this.cantidades.add(cantidad);
+    }
+
+    public Receta() {
+    }
+
+    public Receta(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Receta(List<Tanda> tandas, String nombre, List<Cantidad> cantidades) {
+        this.tandas = tandas;
+        this.nombre = nombre;
+        this.cantidades = cantidades;
+    }
+
+    public List<Cantidad> getCantidades() {
+        return cantidades;
+    }
+
+    public void setCantidades(List<Cantidad> cantidades) {
+        this.cantidades = cantidades;
+    }
+    
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,7 +106,7 @@ public class Receta implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Receta[ id=" + id + " ]";
+        return this.nombre;
     }
     
 }
