@@ -31,7 +31,7 @@ public class PersistenciaMateriales {
     private static class PersistenciaMaterialesHolder {
 
         private static final PersistenciaMateriales INSTANCE = new PersistenciaMateriales();
-        private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ANIMALITOS_VETPU");
+        private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("PizzasSanCaPU");
         private static final EntityManager em = emf.createEntityManager();
 
     }

@@ -24,7 +24,7 @@ public class Proveedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String telefono;
     private String direccion;
     private String nombre;
@@ -32,11 +32,11 @@ public class Proveedor implements Serializable {
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
     private List<Producto> productos;
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class Proveedor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += (Long) id;
         return hash;
     }
 
@@ -99,7 +99,7 @@ public class Proveedor implements Serializable {
             return false;
         }
         Proveedor other = (Proveedor) object;
-        if (this.id != other.id) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;

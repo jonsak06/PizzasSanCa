@@ -24,10 +24,10 @@ public class Componente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String nombre;
     private String unidadDeMedida;
-    private String cantidadDeAlerta;
+    private int cantidadDeAlerta;
     
     @OneToMany(mappedBy = "componente", cascade = CascadeType.ALL)
     private List<Producto> productos;
@@ -35,7 +35,7 @@ public class Componente implements Serializable {
     @OneToMany(mappedBy = "componente", cascade = CascadeType.ALL)
     private List<Cantidad> cantidades;
 
-    public Componente(String nombre, String unidadDeMedida, String cantidadDeAlerta) {
+    public Componente(String nombre, String unidadDeMedida, int cantidadDeAlerta) {
         this.nombre = nombre;
         this.unidadDeMedida = unidadDeMedida;
         this.cantidadDeAlerta = cantidadDeAlerta;
@@ -63,11 +63,11 @@ public class Componente implements Serializable {
         this.unidadDeMedida = unidadDeMedida;
     }
 
-    public String getCantidadDeAlerta() {
+    public int getCantidadDeAlerta() {
         return cantidadDeAlerta;
     }
 
-    public void setCantidadDeAlerta(String cantidadDeAlerta) {
+    public void setCantidadDeAlerta(int cantidadDeAlerta) {
         this.cantidadDeAlerta = cantidadDeAlerta;
     }
 
@@ -96,18 +96,18 @@ public class Componente implements Serializable {
     }
     
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += (Long) id;
         return hash;
     }
 
@@ -118,7 +118,7 @@ public class Componente implements Serializable {
             return false;
         }
         Componente other = (Componente) object;
-        if (this.id != other.id) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
