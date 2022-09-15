@@ -107,7 +107,7 @@ public class Proveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Proveedor[ id=" + id + " ]";
+        return this.nombre;
     }
     
 }

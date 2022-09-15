@@ -26,11 +26,12 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String imagen;
+    private byte[] imagen;
     private String marca;
     private String comentarios;
     private int precio;
     private int valoracion;
+    private float cantidad;
     
     @ManyToOne
     private Componente componente;
@@ -44,19 +45,25 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    
-    public Producto(String imagen, String marca, String comentarios, int precio, int valoracion, Componente componente, Proveedor proveedor) {
+    public float getCantidad() {
+        return cantidad;
+    }
+
+    public Producto(byte[] imagen, String marca, String comentarios, int precio, int valoracion, float cantidad) {
+      
         this.imagen = imagen;
         this.marca = marca;
         this.comentarios = comentarios;
         this.precio = precio;
         this.valoracion = valoracion;
-        this.componente = componente;
-        this.proveedor = proveedor;
+        this.cantidad = cantidad;
     }
 
     
-    public Producto(String imagen, String marca, String comentarios, int precio, int valoracion) {
+    
+
+    
+    public Producto(byte[] imagen, String marca, String comentarios, int precio, int valoracion) {
         this.imagen = imagen;
         this.marca = marca;
         this.comentarios = comentarios;
@@ -66,11 +73,11 @@ public class Producto implements Serializable {
 
     
     
-    public String getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
 

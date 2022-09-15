@@ -126,7 +126,7 @@ public class Componente implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Componente[ id=" + id + " ]";
+        return this.nombre;
     }
     
 }
