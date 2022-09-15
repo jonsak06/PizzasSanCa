@@ -6,10 +6,18 @@
 package Persistencia;
 
 
+import Entidades.Componente;
+import Entidades.Proveedor;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -87,4 +95,45 @@ public class PersistenciaMateriales {
             em.getTransaction().rollback();
         }
     }
+    
+    public List<Componente> listaComponentes() {
+        EntityManager em = getEntity();
+        List<Componente> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Componente", Componente.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Proveedor> listaProveedores() {
+        EntityManager em = getEntity();
+        List<Proveedor> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Proveedor", Proveedor.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+public byte[] convertirImagen(String path) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        BufferedImage img = ImageIO.read(new File(path));
+        ImageIO.write(img, "png", baos);
+        baos.flush();
+
+        String base64String = Base64.encode(baos.toByteArray());
+        baos.close();
+
+        return Base64.decode(base64String);
+    }
 }
+
