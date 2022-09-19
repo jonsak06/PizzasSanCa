@@ -6,8 +6,10 @@
 package Persistencia;
 
 
+import Entidades.Cantidad;
 import Entidades.Componente;
 import Entidades.Proveedor;
+import Entidades.Receta;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -116,6 +118,34 @@ public class PersistenciaMateriales {
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM Proveedor", Proveedor.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Receta> listaRecetas() {
+        EntityManager em = getEntity();
+        List<Receta> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Receta", Receta.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Cantidad> listaCantidades(long idReceta) {
+        EntityManager em = getEntity();
+        List<Cantidad> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Cantidad where receta_id = "+ idReceta+ "", Cantidad.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,7 +23,7 @@ public class Cantidad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int porReceta;
+    private Float porReceta;
     
     @ManyToOne
     private Receta receta;
@@ -31,7 +31,7 @@ public class Cantidad implements Serializable {
     @ManyToOne
     private Componente componente;
 
-    public Cantidad(int porReceta, Receta receta, Componente componente) {
+    public Cantidad(Float porReceta, Receta receta, Componente componente) {
         this.porReceta = porReceta;
         this.receta = receta;
         this.componente = componente;
@@ -40,13 +40,17 @@ public class Cantidad implements Serializable {
     public Cantidad() {
     }
 
+    public Cantidad(Float porReceta) {
+        this.porReceta = porReceta;
+    }
+
     
     
-    public int getPorReceta() {
+    public Float getPorReceta() {
         return porReceta;
     }
 
-    public void setPorReceta(int porReceta) {
+    public void setPorReceta(Float porReceta) {
         this.porReceta = porReceta;
     }
 
@@ -98,7 +102,7 @@ public class Cantidad implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Cantidad[ id=" + id + " ]";
+        return "" + this.porReceta + "";
     }
     
 }
