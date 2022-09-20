@@ -45,6 +45,10 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
+    public void setCantidad(float cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public float getCantidad() {
         return cantidad;
     }

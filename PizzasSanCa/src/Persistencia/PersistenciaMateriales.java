@@ -8,6 +8,7 @@ package Persistencia;
 
 import Entidades.Cantidad;
 import Entidades.Componente;
+import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Receta;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
@@ -132,6 +133,20 @@ public class PersistenciaMateriales {
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM Receta", Receta.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Producto> listaProductos() {
+        EntityManager em = getEntity();
+        List<Producto> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Producto", Producto.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

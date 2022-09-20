@@ -11,8 +11,10 @@ import Entidades.Proveedor;
 import Persistencia.PersistenciaMateriales;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -40,13 +42,40 @@ public class CrearProducto extends javax.swing.JFrame {
         
         List<Proveedor> Proveedores = PersistenciaMateriales.getInstance().listaProveedores();
         
+        
         for(int i = 0; i<Proveedores.size(); i++)
         {
             comboProveedor.addItem(Proveedores.get(i));
         }
         
+        Object matris[][] = new String[Proveedores.size()][4];
         
+        for(int i=0; i<Proveedores.size(); i++){
+            matris[i][0] = Proveedores.get(i).getNombre();
+            matris[i][1] = Proveedores.get(i).getDireccion();
+            matris[i][2] = Proveedores.get(i).getTelefono();
+            matris[i][3] = Proveedores.get(i).getId().toString();
+            
+        }
         
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre", "Direccion", "Telefono", "id"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               true, true, true, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+        
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMaxWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMinWidth(0);
     }
 
     /**
@@ -86,6 +115,10 @@ public class CrearProducto extends javax.swing.JFrame {
         Comentarios = new javax.swing.JTextArea();
         cantidad = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        modificarProveedor = new javax.swing.JButton();
+        EliminarProveedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +185,33 @@ public class CrearProducto extends javax.swing.JFrame {
 
         jLabel13.setText("Cantidad");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        modificarProveedor.setText("Modificar");
+        modificarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarProveedorActionPerformed(evt);
+            }
+        });
+
+        EliminarProveedor.setText("Eliminar");
+        EliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarProveedorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,13 +236,10 @@ public class CrearProducto extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboComponente, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 295, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(crearProveedor)
-                                .addGap(68, 68, 68))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addGap(18, 18, 18)
@@ -194,11 +251,13 @@ public class CrearProducto extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(nombreProveedor)
-                                            .addComponent(direccionProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
-                                .addContainerGap())
+                                            .addComponent(direccionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(crearProveedor, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)
-                                .addGap(96, 96, 96))))
+                                .addGap(33, 33, 33)))
+                        .addGap(140, 140, 140))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,70 +290,94 @@ public class CrearProducto extends javax.swing.JFrame {
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(220, 220, 220)
+                                .addComponent(modificarProveedor)
+                                .addGap(95, 95, 95)
+                                .addComponent(EliminarProveedor)
+                                .addContainerGap(97, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(direccionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(telefonoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(crearProveedor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(comboComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel9)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(comboComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(foto))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel9)
+                                .addGap(26, 26, 26))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(38, 38, 38))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Valoracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(direccionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(telefonoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(crearProveedor)
+                        .addGap(77, 77, 77)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(38, 38, 38))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Valoracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 21, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(modificarProveedor)
+                            .addComponent(EliminarProveedor))))
                 .addContainerGap())
         );
 
@@ -308,6 +391,39 @@ public class CrearProducto extends javax.swing.JFrame {
         Proveedor provedor = new Proveedor(telefonoProveedor.getText(), direccionProveedor.getText(), nombreProveedor.getText());
         PersistenciaMateriales.getInstance().persist(provedor);
         comboProveedor.addItem(provedor);
+        List<Proveedor> Proveedores = new ArrayList<Proveedor> ();
+        for(int i=0; i<comboProveedor.getModel().getSize(); i++){
+            Proveedores.add(comboProveedor.getItemAt(i));
+        }
+        
+        Object matris[][] = new String[Proveedores.size()][4];
+        
+        for(int i=0; i<Proveedores.size(); i++){
+            matris[i][0] = Proveedores.get(i).getNombre();
+            matris[i][1] = Proveedores.get(i).getDireccion();
+            matris[i][2] = Proveedores.get(i).getTelefono();
+            matris[i][3] = Proveedores.get(i).getId().toString();
+            
+        }
+        
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre", "Direccion", "Telefono", "id"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               true, true, true, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+        
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMaxWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMinWidth(0);
         
     }//GEN-LAST:event_crearProveedorActionPerformed
 
@@ -344,6 +460,97 @@ public class CrearProducto extends javax.swing.JFrame {
             Logger.getLogger(CrearProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void modificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarProveedorActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        int fila = jTable1.getSelectedRow();
+        Proveedor proveedor  = (Proveedor) comboProveedor.getSelectedItem(); 
+        Long id = Long.parseLong(jTable1.getValueAt(fila, 3).toString());
+        String nombre = jTable1.getValueAt(fila, 0).toString();
+        String direccion = jTable1.getValueAt(fila, 1).toString();
+        String telefono = jTable1.getValueAt(fila, 2).toString();
+        
+        List<Proveedor> Proveedores = new ArrayList<Proveedor> ();
+        for(int i=0; i<comboProveedor.getModel().getSize(); i++){
+            if(comboProveedor.getItemAt(i).getId()== id){
+                comboProveedor.getItemAt(i).setNombre(nombre);
+                comboProveedor.getItemAt(i).setDireccion(direccion);
+                comboProveedor.getItemAt(i).setTelefono(telefono);
+                PersistenciaMateriales.getInstance().persist(comboProveedor.getItemAt(i));
+            }
+        }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_modificarProveedorActionPerformed
+
+    private void EliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProveedorActionPerformed
+        // TODO add your handling code here:
+        
+        
+        int fila = jTable1.getSelectedRow();
+        Long id = Long.parseLong(jTable1.getValueAt(fila, 3).toString());
+        String nombre = jTable1.getValueAt(fila, 0).toString();
+        String direccion = jTable1.getValueAt(fila, 1).toString();
+        String telefono = jTable1.getValueAt(fila, 2).toString();
+        
+        Proveedor proveedor = null;
+        
+        for(int i=0; i<comboProveedor.getModel().getSize(); i++){
+            if(comboProveedor.getItemAt(i).getId()== id){
+                
+                proveedor  = (Proveedor) comboProveedor.getSelectedItem(); 
+            }
+        }
+        
+        
+         comboProveedor.removeItem(proveedor);
+         PersistenciaMateriales.getInstance().delete(proveedor);
+        
+        
+        List<Proveedor> Proveedores = new ArrayList<Proveedor> ();
+        for(int i=0; i<comboProveedor.getModel().getSize(); i++){
+            Proveedores.add(comboProveedor.getItemAt(i));
+        }
+        
+        Object matris[][] = new String[Proveedores.size()][4];
+        
+        for(int i=0; i<Proveedores.size(); i++){
+            matris[i][0] = Proveedores.get(i).getNombre();
+            matris[i][1] = Proveedores.get(i).getDireccion();
+            matris[i][2] = Proveedores.get(i).getTelefono();
+            matris[i][3] = Proveedores.get(i).getId().toString();
+            
+        }
+        
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Nombre", "Direccion", "Telefono", "id"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               true, true, true, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+        
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMaxWidth(0); 
+        jTable1.getColumnModel().getColumn(3).setMinWidth(0);
+        
+        
+        
+    }//GEN-LAST:event_EliminarProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,6 +589,7 @@ public class CrearProducto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Comentarios;
+    private javax.swing.JButton EliminarProveedor;
     private javax.swing.JTextField Marca;
     private javax.swing.JSpinner Precio;
     private javax.swing.JComboBox<String> Valoracion;
@@ -407,6 +615,9 @@ public class CrearProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton modificarProveedor;
     private javax.swing.JTextField nombreProveedor;
     private javax.swing.JTextField telefonoProveedor;
     // End of variables declaration//GEN-END:variables

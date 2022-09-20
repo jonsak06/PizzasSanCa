@@ -105,6 +105,9 @@ public class CrearReceta extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         Modificar = new javax.swing.JButton();
         añadirComponente = new javax.swing.JButton();
+        EliminarCanridad = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        EliminarReceta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,24 +182,26 @@ public class CrearReceta extends javax.swing.JFrame {
             }
         });
 
+        EliminarCanridad.setText("Eliminar");
+        EliminarCanridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCanridadActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Lista de componentes en la receta seleccionada");
+
+        EliminarReceta.setText("Eliminar Receta");
+        EliminarReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarRecetaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(211, 211, 211))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(comboReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(comboComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(añadirComponente)
-                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -218,12 +223,37 @@ public class CrearReceta extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(Modificar)))
+                        .addGap(208, 208, 208)
+                        .addComponent(Modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EliminarCanridad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(211, 211, 211))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(EliminarReceta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(123, 123, 123))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comboReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(añadirComponente)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,11 +279,17 @@ public class CrearReceta extends javax.swing.JFrame {
                     .addComponent(comboComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(añadirComponente))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(EliminarReceta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(Modificar)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modificar)
+                    .addComponent(EliminarCanridad))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,6 +402,64 @@ public class CrearReceta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_comboRecetaItemStateChanged
 
+    private void EliminarCanridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCanridadActionPerformed
+        // TODO add your handling code here:
+        
+        int fila = tabla.getSelectedRow();
+        Entidades.Receta recetita  = (Entidades.Receta) comboReceta.getSelectedItem(); 
+        Long id = Long.parseLong(tabla.getValueAt(fila, 2).toString());
+        
+        for(int i = 0; i<recetita.getCantidades().size(); i++){
+            if(Objects.equals(id, recetita.getCantidades().get(i).getId()))
+            {
+                Cantidad f = recetita.getCantidades().get(i);
+                PersistenciaMateriales.getInstance().delete(f);
+                recetita.getCantidades().remove(f);
+            }
+        }
+        
+        List<Cantidad> cant = recetita.getCantidades();
+        Object matris[][] = new String[cant.size()][3];
+        
+        for(int i=0; i<cant.size(); i++){
+            matris[i][0] = cant.get(i).getComponente().getNombre();
+            matris[i][1] = cant.get(i).getPorReceta().toString();
+            matris[i][2] = cant.get(i).getId().toString();
+            
+        }
+       
+         tabla.setModel(new javax.swing.table.DefaultTableModel(
+                           matris,
+                           new String [] {
+                               "Componente", "Cantidad", "id"
+                           }
+                       ) {
+                           boolean[] canEdit = new boolean [] {
+                               false, true, false
+                           };
+
+                           public boolean isCellEditable(int rowIndex, int columnIndex) {
+                               return canEdit [columnIndex];
+                           }
+                       });
+            
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(0); 
+        tabla.getColumnModel().getColumn(2).setMaxWidth(0); 
+        tabla.getColumnModel().getColumn(2).setMinWidth(0);
+        
+        
+        
+    }//GEN-LAST:event_EliminarCanridadActionPerformed
+
+    private void EliminarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarRecetaActionPerformed
+        // TODO add your handling code here:
+        
+         Entidades.Receta recetita  = (Entidades.Receta) comboReceta.getSelectedItem(); 
+         comboReceta.removeItem(recetita);
+         PersistenciaMateriales.getInstance().delete(recetita);
+         
+    }//GEN-LAST:event_EliminarRecetaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -406,6 +500,8 @@ public class CrearReceta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField Cantidad;
+    private javax.swing.JButton EliminarCanridad;
+    private javax.swing.JButton EliminarReceta;
     private javax.swing.JButton Modificar;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton añadirComponente;
@@ -418,6 +514,7 @@ public class CrearReceta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
