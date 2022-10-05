@@ -29,6 +29,12 @@ public class Lugar implements Serializable {
     private Long id;
     private String nombre;
     private String direccion;
+    
+    public Lugar() {}
+    public Lugar(String nombre, String direccion) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
 
     public Long getId() {
         return id;
@@ -84,7 +90,7 @@ public class Lugar implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Lugar[ id=" + id + " ]";
+        return this.nombre;
     }
     
 }

@@ -46,6 +46,18 @@ public class Tanda implements Serializable {
     
     @ManyToOne
     private Receta receta;
+    
+    public Tanda() {}
+
+    public Tanda(Date fechaElaboracion, int valoracion, int precioUnitario, int cantidadUnidades, int cantidadConsumida, String imagen, Receta receta) {
+        this.fechaElaboracion = fechaElaboracion;
+        this.valoracion = valoracion;
+        this.precioUnitario = precioUnitario;
+        this.cantidadUnidades = cantidadUnidades;
+        this.cantidadConsumida = cantidadConsumida;
+        this.imagen = imagen;
+        this.receta = receta;
+    }
 
     public Long getId() {
         return id;

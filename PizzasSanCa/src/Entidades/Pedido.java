@@ -34,6 +34,16 @@ public class Pedido implements Serializable {
     private Tanda tanda;
     @ManyToOne
     private Comprador comprador;
+    
+    public Pedido() {}
+    
+    public Pedido(int descuento, Date fecha, int unidades, Comprador comprador, Tanda tanda) {
+        this.descuento = descuento;
+        this.fecha = fecha;
+        this.unidades = unidades;
+        this.comprador = comprador;
+        this.tanda = tanda;
+    }
 
     public Long getId() {
         return id;

@@ -35,6 +35,16 @@ public class Paquete implements Serializable {
     @ManyToOne
     private Lugar lugar;
     
+    public Paquete() {}
+    
+    public Paquete (Date fecha, int unidadesLlevadas, int unidadesVendidas, Lugar lugar, Tanda tanda) {
+        this.fecha = fecha;
+        this.unidadesLlevadas = unidadesLlevadas;
+        this.unidadesVendidas = unidadesVendidas;
+        this.lugar = lugar;
+        this.tanda = tanda;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -105,7 +115,7 @@ public class Paquete implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Paquete[ id=" + id + " ]";
+        return "Fecha: " + id + " - Local: " + fecha + " - Tanda: ";
     }
     
 }

@@ -8,9 +8,12 @@ package Persistencia;
 
 import Entidades.Cantidad;
 import Entidades.Componente;
+import Entidades.Comprador;
+import Entidades.Lugar;
 import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Receta;
+import Entidades.Tanda;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -169,7 +172,49 @@ public class PersistenciaMateriales {
         return lista;
     }
     
-public byte[] convertirImagen(String path) throws IOException {
+    public List<Lugar> listaLugares() {
+        EntityManager em = getEntity();
+        List<Lugar> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Lugar", Lugar.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Comprador> listaCompradores() {
+        EntityManager em = getEntity();
+        List<Comprador> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Comprador", Comprador.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Tanda> listaTandas() {
+        EntityManager em = getEntity();
+        List<Tanda> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Tanda", Comprador.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public byte[] convertirImagen(String path) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BufferedImage img = ImageIO.read(new File(path));
         ImageIO.write(img, "png", baos);

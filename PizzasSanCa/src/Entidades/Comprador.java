@@ -29,6 +29,13 @@ public class Comprador implements Serializable {
     private Long id;
     private String nombre;
     private String telefono;
+    
+    public Comprador() {}
+    
+    public Comprador(String nombre, String telefono) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+    }
 
     public Long getId() {
         return id;
@@ -84,7 +91,7 @@ public class Comprador implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Comprador[ id=" + id + " ]";
+        return this.nombre;
     }
     
 }
