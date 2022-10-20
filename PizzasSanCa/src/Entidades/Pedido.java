@@ -124,7 +124,7 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Pedido[ id=" + id + " ]";
+        return this.id.toString();
     }
     
 }

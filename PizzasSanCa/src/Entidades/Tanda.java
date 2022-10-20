@@ -183,7 +183,7 @@ public class Tanda implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Tanda[ id=" + id + " ]";
+        return this.id.toString();
     }
     
 }

@@ -205,7 +205,7 @@ public class PersistenciaMateriales {
         List<Tanda> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Tanda", Comprador.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Tanda", Tanda.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

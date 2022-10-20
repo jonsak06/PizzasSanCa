@@ -124,7 +124,7 @@ public class Paquete implements Serializable {
 
     @Override
     public String toString() {
-        return "Fecha: " + id + " - Local: " + fecha + " - Tanda: ";
+        return this.id.toString();
     }
     
 }
