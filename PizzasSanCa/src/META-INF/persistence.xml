@@ -9,10 +9,10 @@
     <class>Entidades.Lugar</class>
     <class>Entidades.Paquete</class>
     <class>Entidades.Pedido</class>
+    <class>Entidades.Producto</class>
     <class>Entidades.Proveedor</class>
     <class>Entidades.Receta</class>
     <class>Entidades.Tanda</class>
-    <class>Entidades.Producto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pizzas?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
