@@ -43,7 +43,15 @@ public class Tanda implements Serializable {
     private int cantidadUnidades;
     private int cantidadConsumida;
     private String imagen;
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     @ManyToOne
     private Receta receta;
     
@@ -57,6 +65,7 @@ public class Tanda implements Serializable {
         this.cantidadConsumida = cantidadConsumida;
         this.imagen = imagen;
         this.receta = receta;
+        this.activo = true;
     }
 
     public Long getId() {

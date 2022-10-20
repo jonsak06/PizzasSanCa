@@ -29,12 +29,21 @@ public class Comprador implements Serializable {
     private Long id;
     private String nombre;
     private String telefono;
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Comprador() {}
     
     public Comprador(String nombre, String telefono) {
         this.nombre = nombre;
         this.telefono = telefono;
+        this.activo = true;
     }
 
     public Long getId() {

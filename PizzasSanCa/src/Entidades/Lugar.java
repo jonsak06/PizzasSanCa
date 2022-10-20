@@ -34,8 +34,17 @@ public class Lugar implements Serializable {
     public Lugar(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.activo = true;
+    }
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
     }
 
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Long getId() {
         return id;
     }

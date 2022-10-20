@@ -36,13 +36,22 @@ public class Pedido implements Serializable {
     private Comprador comprador;
     
     public Pedido() {}
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Pedido(int descuento, Date fecha, int unidades, Comprador comprador, Tanda tanda) {
         this.descuento = descuento;
         this.fecha = fecha;
         this.unidades = unidades;
         this.comprador = comprador;
         this.tanda = tanda;
+        this.activo = true;
     }
 
     public Long getId() {

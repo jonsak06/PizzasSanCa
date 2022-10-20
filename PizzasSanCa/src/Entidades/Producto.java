@@ -38,12 +38,19 @@ public class Producto implements Serializable {
     
     @ManyToOne
     private Proveedor proveedor;
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Consume> consumes;
 
-    public Producto() {
-    }
+    public Producto() {}
 
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
@@ -61,6 +68,7 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.valoracion = valoracion;
         this.cantidad = cantidad;
+        this.activo = true;
     }
 
     
@@ -73,6 +81,7 @@ public class Producto implements Serializable {
         this.comentarios = comentarios;
         this.precio = precio;
         this.valoracion = valoracion;
+        this.activo = true;
     }
 
     

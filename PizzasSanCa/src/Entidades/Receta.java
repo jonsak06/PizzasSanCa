@@ -27,7 +27,15 @@ public class Receta implements Serializable {
     @OneToMany(mappedBy = "receta")
     private List<Cantidad> cantidades;
 
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -40,17 +48,18 @@ public class Receta implements Serializable {
         this.cantidades.add(cantidad);
     }
 
-    public Receta() {
-    }
+    public Receta() {}
 
     public Receta(String nombre) {
         this.nombre = nombre;
+        this.activo = true;
     }
 
     public Receta(List<Tanda> tandas, String nombre, List<Cantidad> cantidades) {
         this.tandas = tandas;
         this.nombre = nombre;
         this.cantidades = cantidades;
+        this.activo = true;
     }
 
     public List<Cantidad> getCantidades() {

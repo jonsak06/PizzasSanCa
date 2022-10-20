@@ -43,8 +43,17 @@ public class Paquete implements Serializable {
         this.unidadesVendidas = unidadesVendidas;
         this.lugar = lugar;
         this.tanda = tanda;
+        this.activo = true;
     }
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Long getId() {
         return id;
     }

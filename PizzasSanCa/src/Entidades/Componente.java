@@ -39,12 +39,20 @@ public class Componente implements Serializable {
         this.nombre = nombre;
         this.unidadDeMedida = unidadDeMedida;
         this.cantidadDeAlerta = cantidadDeAlerta;
+        this.activo = true;
     }
 
-    public Componente() {
+    public Componente() {}
+
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
     }
 
-    
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     
     
     public String getNombre() {

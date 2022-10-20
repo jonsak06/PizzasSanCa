@@ -31,7 +31,15 @@ public class Proveedor implements Serializable {
     
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
     private List<Producto> productos;
-    
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Long getId() {
         return id;
     }
@@ -76,10 +84,10 @@ public class Proveedor implements Serializable {
         this.telefono = telefono;
         this.direccion = direccion;
         this.nombre = nombre;
+        this.activo = true;
     }
 
-    public Proveedor() {
-    }
+    public Proveedor() {}
     
     public void addProducto(Producto producto) {
         this.productos.add(producto);

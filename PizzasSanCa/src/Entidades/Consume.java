@@ -31,19 +31,27 @@ public class Consume implements Serializable {
     @ManyToOne
     private Tanda tanda;
 
-    public Consume() {
-    }
+    public Consume() {}
 
     public Consume(int cantidad, Producto producto, Tanda tanda) {
         this.cantidad = cantidad;
         this.producto = producto;
         this.tanda = tanda;
+        this.activo = true;
     }
 
     public int getCantidad() {
         return cantidad;
     }
+private boolean activo;
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }

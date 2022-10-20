@@ -24,6 +24,16 @@ public class Cantidad implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Float porReceta;
+    private boolean activo;
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
     
     @ManyToOne
     private Receta receta;
@@ -35,10 +45,9 @@ public class Cantidad implements Serializable {
         this.porReceta = porReceta;
         this.receta = receta;
         this.componente = componente;
-    }
+    this.activo = true;}
 
-    public Cantidad() {
-    }
+    public Cantidad() {}
 
     public Cantidad(Float porReceta) {
         this.porReceta = porReceta;
