@@ -10,6 +10,8 @@ import Entidades.Cantidad;
 import Entidades.Componente;
 import Entidades.Comprador;
 import Entidades.Lugar;
+import Entidades.Paquete;
+import Entidades.Pedido;
 import Entidades.Producto;
 import Entidades.Proveedor;
 import Entidades.Receta;
@@ -206,6 +208,34 @@ public class PersistenciaMateriales {
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM Tanda", Tanda.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Pedido> listaPedidos() {
+        EntityManager em = getEntity();
+        List<Pedido> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Pedido", Pedido.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Paquete> listaPaquetes() {
+        EntityManager em = getEntity();
+        List<Paquete> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM Paquete", Paquete.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
