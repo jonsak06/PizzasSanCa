@@ -109,7 +109,7 @@ public class PersistenciaMateriales {
         List<Componente> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Componente", Componente.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Componente WHERE activo = 1", Componente.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,7 +123,7 @@ public class PersistenciaMateriales {
         List<Proveedor> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Proveedor", Proveedor.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Proveedor WHERE activo = 1", Proveedor.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,7 +137,7 @@ public class PersistenciaMateriales {
         List<Receta> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Receta", Receta.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Receta WHERE activo = 1", Receta.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +151,7 @@ public class PersistenciaMateriales {
         List<Producto> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Producto", Producto.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Producto WHERE activo = 1", Producto.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,7 +165,7 @@ public class PersistenciaMateriales {
         List<Cantidad> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Cantidad where receta_id = "+ idReceta+ "", Cantidad.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Cantidad where receta_id = "+ idReceta+ " AND activo = 1", Cantidad.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,7 +179,7 @@ public class PersistenciaMateriales {
         List<Lugar> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Lugar", Lugar.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Lugar WHERE activo = 1", Lugar.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,7 +193,7 @@ public class PersistenciaMateriales {
         List<Comprador> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Comprador", Comprador.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Comprador WHERE activo = 1", Comprador.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,7 +207,7 @@ public class PersistenciaMateriales {
         List<Tanda> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Tanda", Tanda.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Tanda WHERE activo = 1", Tanda.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,7 +221,7 @@ public class PersistenciaMateriales {
         List<Pedido> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Pedido", Pedido.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Pedido WHERE activo = 1", Pedido.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -235,7 +235,7 @@ public class PersistenciaMateriales {
         List<Paquete> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM Paquete", Paquete.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM Paquete WHERE activo = 1", Paquete.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
