@@ -27,6 +27,7 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private byte[] imagen;
+    private String imagen2;
     private String marca;
     private String comentarios;
     private int precio;
@@ -58,6 +59,14 @@ public class Producto implements Serializable {
 
     public float getCantidad() {
         return cantidad;
+    }
+
+    public String getImagen2() {
+        return imagen2;
+    }
+
+    public void setImagen2(String imagen2) {
+        this.imagen2 = imagen2;
     }
 
     public Producto(byte[] imagen, String marca, String comentarios, int precio, int valoracion, float cantidad) {
